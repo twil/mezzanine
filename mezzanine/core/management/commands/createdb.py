@@ -50,6 +50,7 @@ class Command(NoArgsCommand):
                                  "mezzanine.blog", "mezzanine.galleries"]],
             [self.create_shop, ["cartridge.shop"]],
             [self.fake_migrations, ["south"]],
+            [self.translation_fields, ["modeltranslation"]],
         ]
 
         for func, apps in mapping:
@@ -137,3 +138,17 @@ class Command(NoArgsCommand):
             if self.verbosity >= 1:
                 print("\nFaking initial migrations ...\n")
             migrate.Command().execute(fake=True)
+
+    def translation_fields(self):
+        try:
+            from modeltranslation.management.commands \
+                    import update_translation_fields as update_fields
+        except ImportError:
+            return
+        update = self.confirm(
+            "\nDjango-modeltranslation is installed for "
+            "this project and you have specified to use "
+            "i18n.\nWould you like to update translation "
+            "fields from the default ones? (yes/no): ")
+        if update:
+            update_fields.Command().execute(verbosity=self.verbosity)

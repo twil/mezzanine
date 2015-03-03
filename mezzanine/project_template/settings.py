@@ -83,6 +83,10 @@ _ = lambda s: s  # Dummy ugettext function, see Django 1.4 docs for info.
 # INSTALLED_APPS setting.
 USE_SOUTH = True
 
+# If True, the django-modeltranslation will be added to the
+# INSTALLED_APPS setting.
+USE_MODELTRANSLATION = False
+
 
 ########################
 # MAIN DJANGO SETTINGS #
@@ -244,9 +248,9 @@ INSTALLED_APPS = (
     "mezzanine.conf",
     "mezzanine.core",
     "mezzanine.generic",
+    "mezzanine.pages",
     "mezzanine.blog",
     "mezzanine.forms",
-    "mezzanine.pages",
     "mezzanine.galleries",
     "mezzanine.twitter",
     # "mezzanine.accounts",
